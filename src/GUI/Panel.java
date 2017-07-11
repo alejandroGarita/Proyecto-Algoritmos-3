@@ -27,6 +27,7 @@ public class Panel extends JPanel implements MouseListener{
     private Grafo grafo;
     
     public Panel(){
+        this.setLayout(null);
         this.addMouseListener(this);
         this.grafo=new Grafo();
     }// constructor
@@ -74,8 +75,13 @@ public class Panel extends JPanel implements MouseListener{
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        char[] id=JOptionPane.showInputDialog(null,"Ingrese el ID").toCharArray();
-        agregarNodo(id[0], e.getX(), e.getY());
+        String idNodo=JOptionPane.showInputDialog(null,"Ingrese el ID");
+        if(idNodo!=null){
+            if(idNodo.equals("")!=true){
+                char[] id=idNodo.toCharArray();
+                agregarNodo(id[0], e.getX(), e.getY());
+            }else JOptionPane.showMessageDialog(this, "Debe ingresar el id del nodo");
+        }
     }
 
     @Override
