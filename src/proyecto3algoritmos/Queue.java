@@ -19,16 +19,31 @@ public class Queue {
         this.finPtr=null;
     }// constructor
     
-    public void enQueue(char id){
-        NodoCola nuevoNodo=new NodoCola(id);
+    public void enQueue(char id, int peso){
+        NodoCola nuevoNodo=new NodoCola(id, peso);
         nuevoNodo.setSuiguienteNodo(null);
         
         if(this.inicioPtr==null){
             this.inicioPtr=nuevoNodo;
+            this.finPtr=nuevoNodo;
         }else {
-            this.finPtr.setSuiguienteNodo(nuevoNodo);
+            NodoCola temp;
+            if(peso<=inicioPtr.getPeso()){
+                nuevoNodo.setSuiguienteNodo(inicioPtr);
+                inicioPtr=nuevoNodo;
+            }else if(peso>=finPtr.getPeso()){
+                    finPtr.setSuiguienteNodo(nuevoNodo);
+                    finPtr=nuevoNodo;
+            }else {
+                temp=inicioPtr;
+                while(peso>temp.getSuiguienteNodo().getPeso()){
+                    temp=temp.getSuiguienteNodo();
+                }
+                nuevoNodo.setSuiguienteNodo(temp.getSuiguienteNodo());
+                temp.setSuiguienteNodo(nuevoNodo);
+            }
+        
         }
-        this.finPtr=nuevoNodo;
     }// enQueue
     
     public char deQueue(){
