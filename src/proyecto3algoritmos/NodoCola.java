@@ -12,10 +12,12 @@ package proyecto3algoritmos;
 public class NodoCola {
     
     private char id;
+    private int peso;
     private NodoCola suiguienteNodo;
     
-    public NodoCola(char id){
+    public NodoCola(char id, int peso){
         this.id=id;
+        this.peso=peso;
     }// constructor
 
     public char getId() {
@@ -32,6 +34,14 @@ public class NodoCola {
 
     public void setSuiguienteNodo(NodoCola suiguienteNodo) {
         this.suiguienteNodo = suiguienteNodo;
+    }
+
+    public int getPeso() {
+        return peso;
+    }
+
+    public void setPeso(int peso) {
+        this.peso = peso;
     }
     
     
