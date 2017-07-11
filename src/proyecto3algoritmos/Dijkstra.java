@@ -26,7 +26,7 @@ public class Dijkstra {
     
     private void calcularRutas(){
         cola=new Queue();
-        cola.enQueue(origen);
+        cola.enQueue(origen,0);
         
         while(!cola.isEmpty()){
             Nodo u=this.grafo.buscarNodo(cola.deQueue());
@@ -62,11 +62,13 @@ public class Dijkstra {
         if(adyacente.getNodoAdyacente()==adyacente.getId()){
             adyacente.setDistanciaNodoAdyacente(actual.getDistanciaNodoAdyacente()+peso);
             adyacente.setNodoAdyacente(actual.getId());
+            this.cola.enQueue(adyacente.getId(),peso);
         }else if((actual.getDistanciaNodoAdyacente()+peso)<adyacente.getDistanciaNodoAdyacente()){
                 adyacente.setDistanciaNodoAdyacente(actual.getDistanciaNodoAdyacente()+peso);
                 adyacente.setNodoAdyacente(actual.getId());
+                this.cola.enQueue(adyacente.getId(),peso);
              }
-        this.cola.enQueue(adyacente.getId());
+//        this.cola.enQueue(adyacente.getId(),peso);
     }// relajacion
     
     
