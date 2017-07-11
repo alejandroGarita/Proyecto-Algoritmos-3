@@ -14,6 +14,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import proyecto3algoritmos.Dijkstra;
+import proyecto3algoritmos.Primm;
 
 /**
  *
@@ -22,17 +23,21 @@ import proyecto3algoritmos.Dijkstra;
 public class VentanaPrincipal extends JFrame implements ActionListener{
     
     private JMenuBar jmb;
+    
     private JMenu jMenuOpciones;
     private JMenuItem jMenuItemAgregarArista;
     
     private JMenu jMenuCalcularRuta;
     private JMenuItem jMenuItemCalcularRuta;
     
+    private JMenu jMenuPrimm;
+    private JMenuItem jMenuItemPrimm;
+    
     public static Panel panel;
     
     public VentanaPrincipal(){
         super("Proyecto 3");
-        this.setSize(500, 400);
+        this.setSize(550, 450);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         
@@ -41,15 +46,21 @@ public class VentanaPrincipal extends JFrame implements ActionListener{
         jMenuItemAgregarArista.addActionListener(this);
         jMenuOpciones.add(jMenuItemAgregarArista);
         
-        jMenuCalcularRuta=new JMenu("Dijstra");
+        jMenuCalcularRuta=new JMenu("Dijkstra");
         jMenuItemCalcularRuta=new JMenuItem("Calcular ruta");
         jMenuItemCalcularRuta.addActionListener(this);
         jMenuCalcularRuta.add(jMenuItemCalcularRuta);
+        
+        jMenuPrimm=new JMenu("Primm");
+        jMenuItemPrimm=new JMenuItem("Generar arbol");
+        jMenuItemPrimm.addActionListener(this);
+        jMenuPrimm.add(jMenuItemPrimm);
         
         jmb=new JMenuBar();
         this.setJMenuBar(jmb);
         jmb.add(jMenuOpciones);
         jmb.add(jMenuCalcularRuta);
+        jmb.add(jMenuPrimm);
         
         this.panel=new Panel();
         this.add(panel);
@@ -77,6 +88,21 @@ public class VentanaPrincipal extends JFrame implements ActionListener{
                         panel.getGrafo().setOrigen(origenArray[0]);
                     }else JOptionPane.showMessageDialog(rootPane, "El destino no existe");
                 }else JOptionPane.showMessageDialog(rootPane, "El nodo de salida no existe");
+        
+        }else if(e.getSource()==jMenuItemPrimm){
+                
+                String raiz=JOptionPane.showInputDialog(rootPane, "Ingrese el ID de la raiz del arbol");
+                if(raiz!=null){
+                    char[] raizArray=raiz.toCharArray();
+                    if(raizArray.length>0){
+                        if(panel.getGrafo().buscarNodo(raizArray[0])!=null){
+                            VentanaPrimm ventanaPrimm=new VentanaPrimm(panel.getGrafo(),raizArray[0]);
+                            ventanaPrimm.setVisible(true);
+                            panel.add(ventanaPrimm);
+                        }else JOptionPane.showMessageDialog(rootPane, "El nodo no se encuentra en el grafo");
+                    }else JOptionPane.showMessageDialog(rootPane, "Debe ingresar el ID de algun nodo");
+                }
+                
         }
         
     }
