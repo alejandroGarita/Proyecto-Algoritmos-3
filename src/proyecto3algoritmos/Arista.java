@@ -11,6 +11,7 @@ package proyecto3algoritmos;
  */
 public class Arista {
     
+    private char origen;
     private Nodo destino;
     private int peso;
     
@@ -49,6 +50,14 @@ public class Arista {
 
     public void setSiguienteArista(Arista siguienteArista) {
         this.siguienteArista = siguienteArista;
+    }
+
+    public char getOrigen() {
+        return origen;
+    }
+
+    public void setOrigen(char origen) {
+        this.origen = origen;
     }
     
 }// arista
