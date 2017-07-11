@@ -5,7 +5,9 @@
  */
 package proyecto3algoritmos;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 
 /**
@@ -37,6 +39,7 @@ public class Nodo {
     public void dibujarAristas(Graphics2D g2){
         Arista temp=this.primerArista;
         while(temp!=null){
+            g2.setStroke(new BasicStroke(1));
             g2.setColor(Color.black);
             g2.drawLine(x, y, temp.getDestino().getX(), temp.getDestino().getY());
             dibujarPeso(x,y,temp.getDestino().getX(),temp.getDestino().getY(), temp.getPeso(),g2);
@@ -54,6 +57,7 @@ public class Nodo {
         if(y1>y2){
             y=y2+(y1-y2)/2;
         }else y=y1+(y2-y1)/2;
+        g2.setFont(new Font("Monospace",Font.BOLD,20));
         g2.drawString(peso+"", x, y);
     }// dibujarPeso
     
@@ -62,6 +66,7 @@ public class Nodo {
         g2.fillOval(x-10, y-18, 25, 25);
         
         g2.setColor(Color.BLACK);
+        g2.setFont(new Font("Monospace",Font.BOLD, 15));
         g2.drawString(id+"", x, y);
         
     }// dibujarNodo
