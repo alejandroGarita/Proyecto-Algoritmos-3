@@ -5,7 +5,9 @@
  */
 package proyecto3algoritmos;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 
 /**
@@ -66,23 +68,22 @@ public class Grafo {
         Nodo temp=buscarNodo(destino);
         if(temp!=null){
             if(temp.getNodoAdyacente()!=destino){
-                System.out.println("Ruta: ");
                 while(temp.getId()!=origen){
                     g2.setColor(Color.red);
                     Nodo tempDestino=buscarNodo(temp.getNodoAdyacente());
+                    g2.setStroke(new BasicStroke(3));
                     g2.drawLine(temp.getX(), temp.getY(), tempDestino.getX(), tempDestino.getY());
                     g2.setColor(Color.red);
                     g2.fillOval(temp.getX()-10, temp.getY()-18, 25, 25);
                     g2.setColor(Color.WHITE);
                     g2.drawString(temp.getId()+"", temp.getX(), temp.getY()); 
-                    System.out.print(temp.getId()+"-->");
                     temp=buscarNodo(temp.getNodoAdyacente());
                 }
                 g2.setColor(Color.red);
                 g2.fillOval(temp.getX()-10, temp.getY()-18, 25, 25);
                 g2.setColor(Color.WHITE);
+                g2.setFont(new Font("Monospace",Font.BOLD, 15));
                 g2.drawString(temp.getId()+"", temp.getX(), temp.getY()); 
-                System.out.print(temp.getId()+"\n");
             }
         }
     }// dibujarRuta
